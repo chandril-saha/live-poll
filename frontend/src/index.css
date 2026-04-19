@@ -1,0 +1,762 @@
+/* ============================================
+   CLAYMORPHISM DARK THEME
+   Soft, pillowy 3D clay surfaces on dark
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+:root {
+  /* Deeper contrast palette */
+  --bg-deep: #0f111a;
+  --bg-base: #16192b;
+  --bg-surface: #1e2235;
+  --bg-elevated: #282d46;
+  --bg-highlight: #343a59;
+
+  /* Accent tones — bright and colorful that pop */
+  --clay-orange: #ff7b00;
+  --clay-orange-light: #ff9e40;
+  --clay-pink: #ff2e93;
+  --clay-purple: #9d4edd;
+  --clay-purple-light: #c77dff;
+  --clay-blue: #0084ff;
+  --clay-blue-light: #4db1ff;
+  --clay-mint: #00f5d4;
+  --clay-mint-light: #7befe2;
+  --clay-yellow: #fee440;
+  --clay-red: #ff3366;
+  --clay-green: #00e676;
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a5b8;
+  --text-muted: #6f748a;
+
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   BACKGROUND â€” Soft gradient atmosphere
+   ============================================ */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      ellipse 600px 400px at 15% 10%,
+      rgba(0, 245, 212, 0.08) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 500px 350px at 85% 80%,
+      rgba(255, 123, 0, 0.08) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 700px 500px at 50% 50%,
+      rgba(26, 30, 42, 0.8) 0%,
+      var(--bg-deep) 80%
+    ),
+    var(--bg-deep);
+}
+
+#root {
+  width: 100%;
+  max-width: 780px;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   TYPOGRAPHY â€” Soft rounded text
+   ============================================ */
+
+h1, h2, h3 {
+  font-weight: 800;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.3rem; }
+
+/* ============================================
+   CLAY PANEL â€” Core claymorphism surface
+   
+   Claymorphism recipe:
+   1. Background slightly lighter than page
+   2. Large border-radius (20-28px)
+   3. Outer shadow for depth (dark, soft)
+   4. Inner shadow highlight (light, top)
+   5. Inner shadow depth (dark, bottom)
+   6. Subtle border for edge definition
+   ============================================ */
+
+.glass-panel {
+  position: relative;
+  padding: 2rem 2.2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 24px;
+
+  background: var(--bg-surface);
+
+  /* The claymorphism triple-shadow formula */
+  box-shadow:
+    /* Outer depth â€” pushes panel off the page */
+    8px 8px 20px rgba(0,0,0,0.35),
+    -4px -4px 16px rgba(60,61,110,0.08),
+    /* Inner top-left highlight â€” inflated clay shine */
+    inset 2px 2px 4px rgba(255,255,255,0.06),
+    /* Inner bottom-right depth â€” clay underside */
+    inset -2px -2px 4px rgba(0,0,0,0.25);
+
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    10px 12px 28px rgba(0,0,0,0.4),
+    -4px -4px 16px rgba(60,61,110,0.1),
+    inset 2px 2px 4px rgba(255,255,255,0.07),
+    inset -2px -2px 4px rgba(0,0,0,0.25);
+}
+
+/* ============================================
+   HEADER â€” Prominent clay bar
+   ============================================ */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.2rem 1.8rem;
+  border-radius: 28px;
+
+  background: var(--bg-elevated);
+
+  box-shadow:
+    8px 8px 24px rgba(0,0,0,0.35),
+    -3px -3px 12px rgba(60,61,110,0.06),
+    inset 2px 2px 5px rgba(255,255,255,0.07),
+    inset -2px -2px 5px rgba(0,0,0,0.3);
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--clay-orange) 0%, var(--clay-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   BUTTONS â€” Plump clay buttons
+   ============================================ */
+
+.button-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn {
+  padding: 11px 24px;
+  border-radius: 16px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.2s ease;
+  position: relative;
+
+  /* Clay button â€” puffed up */
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  box-shadow:
+    5px 5px 14px rgba(0,0,0,0.3),
+    -2px -2px 8px rgba(60,61,110,0.06),
+    inset 1px 1px 3px rgba(255,255,255,0.07),
+    inset -1px -1px 3px rgba(0,0,0,0.2);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    6px 7px 18px rgba(0,0,0,0.35),
+    -2px -2px 10px rgba(60,61,110,0.08),
+    inset 1px 1px 3px rgba(255,255,255,0.08),
+    inset -1px -1px 3px rgba(0,0,0,0.2);
+}
+
+/* Pressed â€” squish the clay down */
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    2px 2px 8px rgba(0,0,0,0.3),
+    inset 2px 2px 5px rgba(0,0,0,0.3),
+    inset -1px -1px 2px rgba(255,255,255,0.04);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--clay-orange) 0%, var(--clay-pink) 60%);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    5px 5px 16px rgba(244,132,95,0.2),
+    -2px -2px 8px rgba(224,82,151,0.06),
+    inset 1px 1px 3px rgba(255,255,255,0.2),
+    inset -1px -2px 4px rgba(0,0,0,0.15);
+}
+
+.btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    6px 8px 22px rgba(244,132,95,0.28),
+    -2px -2px 10px rgba(224,82,151,0.08),
+    inset 1px 1px 3px rgba(255,255,255,0.22),
+    inset -1px -2px 4px rgba(0,0,0,0.15);
+}
+
+.btn.primary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    2px 2px 8px rgba(244,132,95,0.15),
+    inset 2px 3px 6px rgba(0,0,0,0.25),
+    inset -1px -1px 2px rgba(255,255,255,0.1);
+}
+
+.btn.outline {
+  background: var(--bg-surface);
+  color: var(--clay-mint);
+  border: 1px solid rgba(78,205,196,0.12);
+}
+
+.btn.outline:hover:not(:disabled) {
+  color: var(--clay-mint-light);
+  box-shadow:
+    6px 7px 18px rgba(0,0,0,0.35),
+    -2px -2px 10px rgba(78,205,196,0.06),
+    inset 1px 1px 3px rgba(255,255,255,0.07),
+    inset -1px -1px 3px rgba(0,0,0,0.2);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  filter: saturate(0.4);
+}
+
+/* ============================================
+   ADDRESS BADGE â€” Small clay pill
+   ============================================ */
+
+.address-badge {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--clay-blue-light);
+  letter-spacing: 0.3px;
+
+  background: var(--bg-base);
+  border: 1px solid rgba(91,141,239,0.1);
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,0.3),
+    inset -1px -1px 2px rgba(255,255,255,0.03),
+    0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   FORM ELEMENTS â€” Inset clay inputs
+   ============================================ */
+
+.form-group {
+  margin-bottom: 1.4rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+
+  /* Pressed-in clay well */
+  background: var(--bg-base);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.35),
+    inset -2px -2px 4px rgba(255,255,255,0.03);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: rgba(244,132,95,0.25);
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.35),
+    inset -2px -2px 4px rgba(255,255,255,0.03),
+    0 0 0 3px rgba(244,132,95,0.1);
+}
+
+/* ============================================
+   BALANCE DISPLAY â€” Glowing clay readout
+   ============================================ */
+
+.balance-readout {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--clay-green);
+
+  background: var(--bg-base);
+  border: 1px solid rgba(74,222,128,0.08);
+  box-shadow:
+    inset 2px 2px 5px rgba(0,0,0,0.35),
+    inset -1px -1px 3px rgba(255,255,255,0.03);
+  text-shadow: 0 0 16px rgba(74,222,128,0.3);
+}
+
+/* ============================================
+   TOAST â€” Floating clay notification
+   ============================================ */
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: 20px;
+  z-index: 1000;
+  max-width: 380px;
+  animation: slideIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+  background: var(--bg-elevated);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow:
+    8px 8px 24px rgba(0,0,0,0.4),
+    -3px -3px 10px rgba(60,61,110,0.05),
+    inset 2px 2px 4px rgba(255,255,255,0.06),
+    inset -2px -2px 4px rgba(0,0,0,0.2);
+  color: var(--text-primary);
+}
+
+.toast.error {
+  border-color: rgba(239,68,68,0.2);
+  box-shadow:
+    8px 8px 24px rgba(0,0,0,0.4),
+    -3px -3px 10px rgba(239,68,68,0.05),
+    inset 2px 2px 4px rgba(255,255,255,0.06),
+    inset -2px -2px 4px rgba(0,0,0,0.2),
+    0 0 30px rgba(239,68,68,0.08);
+}
+
+.toast.error .toast-title {
+  color: var(--clay-red);
+}
+
+.toast.success {
+  border-color: rgba(74,222,128,0.15);
+  box-shadow:
+    8px 8px 24px rgba(0,0,0,0.4),
+    -3px -3px 10px rgba(74,222,128,0.04),
+    inset 2px 2px 4px rgba(255,255,255,0.06),
+    inset -2px -2px 4px rgba(0,0,0,0.2),
+    0 0 30px rgba(74,222,128,0.06);
+}
+
+.toast.success .toast-title {
+  color: var(--clay-green);
+}
+
+.toast-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 0.25rem;
+}
+
+.toast-msg {
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ============================================
+   EVENTS LIST â€” Inset clay scroll area
+   ============================================ */
+
+.events-list {
+  margin-top: 1rem;
+  max-height: 230px;
+  overflow-y: auto;
+  border-radius: 16px;
+
+  background: var(--bg-base);
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow:
+    inset 3px 3px 8px rgba(0,0,0,0.3),
+    inset -2px -2px 4px rgba(255,255,255,0.02);
+}
+
+.event-item {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-item:hover {
+  background: rgba(255,255,255,0.02);
+  color: var(--text-primary);
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   BADGE â€” Small puffed clay tag
+   ============================================ */
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
+
+  background: var(--bg-elevated);
+  color: var(--clay-yellow);
+  border: 1px solid rgba(240,200,80,0.08);
+  box-shadow:
+    3px 3px 8px rgba(0,0,0,0.25),
+    -1px -1px 4px rgba(60,61,110,0.04),
+    inset 1px 1px 2px rgba(255,255,255,0.06),
+    inset -1px -1px 2px rgba(0,0,0,0.15);
+}
+
+/* ============================================
+   STATUS SPINNER â€” Pulsing clay orb
+   ============================================ */
+
+.status-ring {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+
+  background: var(--bg-base);
+  border: 2px solid var(--bg-highlight);
+  box-shadow:
+    inset 1px 1px 3px rgba(0,0,0,0.4),
+    0 1px 2px rgba(0,0,0,0.2);
+}
+
+.status-ring.pending {
+  background: linear-gradient(135deg, var(--clay-orange) 0%, var(--clay-pink) 100%);
+  border-color: rgba(244,132,95,0.4);
+  box-shadow:
+    inset 1px 1px 2px rgba(255,255,255,0.25),
+    inset -1px -1px 2px rgba(0,0,0,0.15),
+    0 0 12px rgba(244,132,95,0.35),
+    0 0 24px rgba(244,132,95,0.15);
+  animation: clay-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes clay-pulse {
+  0%, 100% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255,255,255,0.25),
+      inset -1px -1px 2px rgba(0,0,0,0.15),
+      0 0 10px rgba(244,132,95,0.3),
+      0 0 20px rgba(244,132,95,0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow:
+      inset 1px 1px 2px rgba(255,255,255,0.25),
+      inset -1px -1px 2px rgba(0,0,0,0.15),
+      0 0 16px rgba(244,132,95,0.45),
+      0 0 32px rgba(244,132,95,0.2);
+    transform: scale(1.15);
+  }
+}
+
+/* ============================================
+   SECTION DIVIDER â€” Soft groove
+   ============================================ */
+
+.section-divider {
+  height: 2px;
+  margin: 1.2rem 0 1.5rem;
+  border: none;
+  border-radius: 1px;
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   SCROLLBAR â€” Rounded clay slider  
+   ============================================ */
+
+.events-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.events-list::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.events-list::-webkit-scrollbar-thumb {
+  background: var(--bg-highlight);
+  border-radius: 4px;
+  box-shadow:
+    inset 1px 1px 0 rgba(255,255,255,0.06);
+}
+
+.events-list::-webkit-scrollbar-thumb:hover {
+  background: var(--clay-purple);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   UTILITY
+   ============================================ */
+
+#wallet-btn-container {
+  display: inline-block;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+::selection {
+  background: var(--clay-orange);
+  color: #fff;
+}
+
+/* ============================================
+   POLL-SPECIFIC COMPONENTS
+   ============================================ */
+
+.poll-card { padding-bottom: 2.5rem; }
+
+.poll-question {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 0.3rem;
+}
+
+.poll-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voted-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--clay-green);
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.15);
+}
+
+.poll-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.poll-option {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.04);
+  text-align: left;
+  font-family: inherit;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  background: var(--bg-elevated);
+  box-shadow:
+    4px 4px 12px rgba(0,0,0,0.25),
+    -2px -2px 8px rgba(60,61,110,0.05),
+    inset 1px 1px 3px rgba(255,255,255,0.06),
+    inset -1px -1px 3px rgba(0,0,0,0.18);
+}
+
+.poll-option:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    5px 6px 16px rgba(0,0,0,0.3),
+    -2px -2px 10px rgba(60,61,110,0.06),
+    inset 1px 1px 3px rgba(255,255,255,0.07),
+    inset -1px -1px 3px rgba(0,0,0,0.18);
+}
+
+.poll-option:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    2px 2px 6px rgba(0,0,0,0.25),
+    inset 2px 2px 5px rgba(0,0,0,0.25),
+    inset -1px -1px 2px rgba(255,255,255,0.03);
+}
+
+.poll-option:disabled { cursor: default; }
+
+.poll-option.selected {
+  border-color: rgba(244,132,95,0.3);
+  box-shadow:
+    4px 4px 14px rgba(244,132,95,0.12),
+    -2px -2px 8px rgba(60,61,110,0.04),
+    inset 1px 1px 3px rgba(255,255,255,0.08),
+    inset -1px -1px 3px rgba(0,0,0,0.18);
+}
+
+.poll-option-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.poll-option-left { display: flex; align-items: center; gap: 12px; }
+.poll-emoji { font-size: 1.4rem; line-height: 1; }
+.poll-label { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.poll-option-right { display: flex; align-items: center; gap: 10px; }
+
+.poll-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 20px; text-align: right;
+}
+
+.poll-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--text-muted);
+  min-width: 38px; text-align: right;
+}
+
+.revealed .poll-pct { color: var(--text-secondary); }
+
+.poll-bar {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  border-radius: 16px;
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+  #root { padding: 1rem; }
+  .header { flex-direction: column; gap: 1rem; text-align: center; padding: 1rem 1.4rem; border-radius: 22px; }
+  .header h1 { font-size: 1.25rem; }
+  .glass-panel { padding: 1.5rem 1.3rem; border-radius: 20px; }
+  .btn { padding: 10px 18px; font-size: 0.8rem; border-radius: 14px; }
+  .poll-question { font-size: 1.2rem; }
+  .poll-option { padding: 14px 16px; border-radius: 14px; }
+  .poll-emoji { font-size: 1.2rem; }
+  .poll-label { font-size: 0.9rem; }
+}
